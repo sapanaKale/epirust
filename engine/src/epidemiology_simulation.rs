@@ -485,8 +485,8 @@ impl Epidemiology {
                 ((*cell, point), current_agent, infection_status)
             }).collect();
             updates.iter().for_each(|pair| {
-                let old_cell = pair.0.0;
-                let new_cell = pair.0.1;
+                let old_cell = (pair.0).0;
+                let new_cell = (pair.0).1;
                 let agent = pair.1;
                 let infection_status = pair.2;
                 let mut new_location = &new_cell;
