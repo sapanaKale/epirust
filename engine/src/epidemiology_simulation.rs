@@ -565,7 +565,7 @@ mod tests {
             percent: 0.2,
         };
         let geography_parameters = GeographyParameters::new(100, 0.003);
-        let config = Config::new(Population::Auto(pop), disease, geography_parameters, vec![], 100, vec![InterventionConfig::Vaccinate(vac)], None);
+        let config = Config::new(Population::Auto(pop), disease, geography_parameters, vec![], 100, vec![InterventionConfig::Vaccinate(vac)], None, 8);
         let epidemiology: Epidemiology = Epidemiology::new(&config, "id".to_string());
         let expected_housing_area = Area::new(Point::new(0, 0), Point::new(39, 100));
         assert_eq!(epidemiology.grid.housing_area, expected_housing_area);
