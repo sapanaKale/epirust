@@ -2,17 +2,17 @@
 
 #  EpiRust
 #  Copyright (c) 2020  ThoughtWorks, Inc.
-# 
+#
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
-# 
+#
 #  This program is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Affero General Public License for more details.
-# 
+#
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -40,7 +40,7 @@ function setup() {
 }
 
 function launch() {
-	 RUSTFLAGS="${RUSTFLAGS}" RUST_LOG="${RUST_LOG}" cargo run --release -- -c config/$1.json > $1_stdout.log 2> $1_stderr.log
+	 RUSTFLAGS="${RUSTFLAGS}" RUST_LOG="${RUST_LOG}" cargo run --release -- --parallel -c config/$1.json > $1_stdout.log 2> $1_stderr.log
 }
 
 function profile() {
@@ -121,7 +121,7 @@ function visualize()
 	[ $COUNT_DIR_FILES -eq 0 ] && exit 0
 
 	for DIR in ${DIR_EXP}/*
-	do 
+	do
 		[ -f "${DIR}" ] && continue
 		[ ! -f $DIR/*_updated.csv ] && python3 ${EPIRUST_HOME}/plot/update_total_infections.py --data-dir ${DIR} --moving-avg-window 14;
 		ERRNO=$? && [ $ERRNO -lt 0 ] && echo "Error encountered: $ERRNO" && exit 128
@@ -154,8 +154,8 @@ case $1 in
 		;;
 	launch-batch)
 		shift
-		if [ $# -eq 2 ] 
-		then 
+		if [ $# -eq 2 ]
+		then
 				setup
 				launch_batch $1 $2
 		else
@@ -164,7 +164,7 @@ case $1 in
 		;;
 	visualize)
 		shift
-		if [ $# -le 2 ] 
+		if [ $# -le 2 ]
 		then
 			setup
 			visualize "$1" "$2"
